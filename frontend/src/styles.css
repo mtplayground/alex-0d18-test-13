@@ -4,34 +4,36 @@
 
 @layer base {
   :root {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 6%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 6%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 24 96% 53%;
-    --primary-foreground: 0 0% 10%;
-    --secondary: 0 0% 14%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14%;
-    --muted-foreground: 0 0% 70%;
-    --accent: 24 96% 53%;
-    --accent-foreground: 0 0% 10%;
+    --brand-black: 0 0% 3%;
+    --brand-near-black: 0 0% 5%;
+    --brand-surface: 0 0% 7%;
+    --brand-surface-raised: 0 0% 10%;
+    --brand-line: 0 0% 18%;
+    --brand-copy: 0 0% 98%;
+    --brand-copy-muted: 0 0% 70%;
+    --brand-orange: 24 96% 53%;
+    --brand-orange-hover: 22 100% 58%;
+    --brand-orange-soft: 24 96% 53% / 0.14;
+    --background: var(--brand-black);
+    --foreground: var(--brand-copy);
+    --card: var(--brand-surface);
+    --card-foreground: var(--brand-copy);
+    --popover: var(--brand-surface);
+    --popover-foreground: var(--brand-copy);
+    --primary: var(--brand-orange);
+    --primary-foreground: 0 0% 7%;
+    --secondary: var(--brand-surface-raised);
+    --secondary-foreground: var(--brand-copy);
+    --muted: var(--brand-surface-raised);
+    --muted-foreground: var(--brand-copy-muted);
+    --accent: var(--brand-orange);
+    --accent-foreground: 0 0% 7%;
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 24 96% 53%;
+    --destructive-foreground: var(--brand-copy);
+    --border: var(--brand-line);
+    --input: var(--brand-line);
+    --ring: var(--brand-orange);
     --radius: 0.5rem;
-    font-family:
-      Inter,
-      ui-sans-serif,
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      sans-serif;
   }
 
   * {
@@ -39,7 +41,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background font-sans text-foreground;
     margin: 0;
     min-width: 320px;
   }
