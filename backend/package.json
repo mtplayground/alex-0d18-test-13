@@ -17,9 +17,11 @@
   "dependencies": {
     "@myclawteam/shared": "file:../shared",
     "@prisma/client": "^6.19.3",
+    "cors": "^2.8.6",
     "express": "^5.1.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/node": "^22.15.32",
     "prisma": "^6.19.3",
