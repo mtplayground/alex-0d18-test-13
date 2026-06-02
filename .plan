@@ -1,0 +1,43 @@
+Architecture plan for myClawTeam
+
+Scope summary
+- Build a full-stack myClawTeam landing page and admin review flow across 24 incremental issues.
+- Product naming and public copy should use myClawTeam from the issue text; do not introduce alternate product or agent names.
+
+Module structure
+- frontend/: React + Vite + TypeScript application.
+- frontend/src/main.tsx: Vite entry point.
+- frontend/src/App.tsx: route/layout shell.
+- frontend/src/pages/HomePage.tsx: assembled landing page.
+- frontend/src/pages/admin/: admin login and submissions views.
+- frontend/src/components/layout/: top navigation, footer, page wrappers.
+- frontend/src/components/sections/: hero, how-it-works tabs, feature grid, community, contact.
+- frontend/src/components/ui/: shadcn/ui components plus local primitives for buttons, pills, cards, form fields, tabs, alerts.
+- frontend/src/lib/: API client, validation helpers, auth token helpers, constants.
+- backend/: Node.js + Express + TypeScript service.
+- backend/src/server.ts: app bootstrap and listener.
+- backend/src/app.ts: Express app with CORS, JSON parsing, routes, error handling, and health check.
+- backend/src/routes/: contact and admin routes.
+- backend/src/middleware/: auth, validation, error handling.
+- backend/src/services/: contact submission persistence, admin auth, password hashing, JWT issuing.
+- backend/src/db/: Prisma client singleton and database helpers.
+- backend/prisma/: schema, migrations, seed script.
+- shared/: shared TypeScript types and validation schemas used by frontend and backend where practical.
+- tests/: backend integration/unit tests and end-to-end tests, or colocated test folders if selected tooling favors that.
+
+Issue dependencies
+- Foundation: #1 establishes frontend/backend TypeScript tooling; #2, #3, and #4 depend on it.
+- Design system: #5 depends on Tailwind setup from #2; #6 and #7 depend on theme tokens; #8 through #12 build landing sections on the shared primitives.
+- Contact flow: #13 creates the data model; #14 exposes POST /contact; #15 builds the frontend form; #16 wires it into navigation and page order.
+- Admin flow: #17 creates admin data and seed; #18 implements login; #19 adds JWT middleware and protected submissions; #20 builds the admin UI.
+- Verification and delivery: #21 covers backend tests, #22 covers submit-then-review E2E, #23 handles responsive/visual QA, and #24 finalizes build/deploy docs and scripts.
+
+Key design decisions
+- Keep frontend and backend as sibling packages with a root workspace package.json for shared lint, format, test, and build scripts.
+- Use TypeScript throughout and share request/response shapes through shared/ to prevent frontend/backend drift.
+- Use Zod or an equivalent schema library for contact and login validation so client-side and server-side rules remain consistent.
+- Use Prisma with PostgreSQL as the only persistence layer; model names should be explicit: ContactSubmission and AdminUser.
+- Keep authentication simple: bcrypt-hashed admin password seeded from env credentials, JWT bearer tokens for protected admin endpoints, and no public registration.
+- Use Tailwind theme tokens for the near-black/orange reference style, then express reusable visual choices through primitives rather than one-off section CSS.
+- Design admin routes and API paths separately: public landing page at /, admin frontend at /admin, public API POST /contact, admin API under /admin/* or /api/admin/* depending on the server routing convention selected in #4.
+- Prefer deterministic tests with isolated database setup for backend integration tests and Playwright for the submit/review E2E flow.
